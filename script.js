@@ -30,12 +30,12 @@ var subject_2_text = [`כל הדברים הקשורים לעולם המבצעי.
 var subject_3_headlines = ['הסבר כללי:'];
 var subject_3_text = [`כל הדברים הקשורים לעולמות הכוח אדם.
 
-דוגמאות: ועדות הערכה, דוחות סיכום הכשרה, כנס קקצ וכו' `];
+דוגמאות: ועדות הערכה, דוחות סיכום הכשרה, כנס קקצ וכו'.`];
 
 var subject_4_headlines = ['הסבר כללי:'];
 var subject_4_text = [`כל הדברים הקשורים בשגרה ושוטף.
 
-'דוגמאות: מסמך מופעים, מצע למסדרי שגרה וכו.`];
+דוגמאות: מסמך מופעים, מצע למסדרי שגרה וכו'.`];
 
 var subject_5_headlines = ['הסבר כללי:'];
 var subject_5_text = [`המקום שבו נמצאים הקישורים לכל הקבצים הקיימים בנוהל ש"י ע"פ תחומים.
@@ -46,7 +46,12 @@ NUMBER_OF_SUBJECTS = 6;
 
 let subjectText = '';
 let subjectHeadline = '';
+let progressBar;
+let forwardArrow;
+let backwardArrow;
 
+
+// Start the coding.
 window.addEventListener("load", () => {
     let path = window.location.pathname;
 
@@ -68,6 +73,9 @@ const initializeStart = () => {
 const initializeMain = () => {
     subjectText = document.getElementById('subject-text');
     subjectHeadline = document.getElementById('subject-headline');
+    progressBar = document.getElementById('progress-bar');
+    forwardArrow = document.getElementById('forward-arrow');
+    backwardArrow = document.getElementById('backward-arrow');
 
     for (let i = 0; i < NUMBER_OF_SUBJECTS; i++) {
         document.getElementById(`subject_${i}`).addEventListener('click', changingText);
@@ -75,13 +83,18 @@ const initializeMain = () => {
 }
 
 const changingText = (event) => {
+    progressBar.src = 'sources/images/progress bar 0.svg';
+    progressBar.style.opacity = '1';
+    forwardArrow.style.opacity = '1';
+    backwardArrow.style.opacity = '0';
+
     let value = event.target.textContent;
     let id = event.target.id;
     let number = id.slice(8,9);
 
-    console.log(value);
-    console.log(id);
-    console.log(number);
+    // console.log(value);
+    // console.log(id);
+    // console.log(number);
 
     // document.querySelectorAll('.cerrent-subject').forEach(element => {
     //     if (element.classList.contains)
@@ -90,60 +103,58 @@ const changingText = (event) => {
         
     // })
     event.target.style.textDecoration = 'underline';
-
     document.getElementById('sub-headline').innerText = `${value}:`;
 
-    switch (id) {
-        case `subject_0`:
-            subject0();
-            break;
-        case `subject_1`:
-            subject1();
-            break;
-        case `subject_2`:
-            subject2();
-            break;
-        case `subject_3`:
-            subject3();
-            break;
-        case `subject_4`:
-            subject4();
-            break;
-        case `subject_5`:
-            subject5();
-            break;
-        default:
-            console.log("error");
-            break;
-    }
+    const curHeadline = window[`subject_${number}_headlines`];
+    const curText = window[`subject_${number}_text`];
+    const curNext = window[`subject${number}`];
+
+    console.log(curNext);
+
+    subjectHeadline.innerText = curHeadline[0];
+    subjectText.innerText = curText[0];
+
+    document.getElementById('forward-arrow').addEventListener('click', curNext);
 }
 
-const subject0 = () => {
-    subjectHeadline.innerText = subject_0_headlines[0];
-    subjectText.innerText = subject_0_text[0];
+var subject0 = () => {
+    document.removeEventListener('click', subject0);
+    progressBar.src = 'sources/images/progress bar 1.svg';
+    backwardArrow.style.opacity = '1';
+    console.log('sub0');
 }
 
-const subject1 = () => {
-    subjectHeadline.innerText = subject_1_headlines[0];
-    subjectText.innerText = subject_1_text[0];
+var subject1 = () => {
+    document.removeEventListener('click', subject1);
+    progressBar.src = 'sources/images/progress bar 1.svg';
+    backwardArrow.style.opacity = '1';
+    console.log('sub1');
 }
 
-const subject2 = () => {
-    subjectHeadline.innerText = subject_2_headlines[0];
-    subjectText.innerText = subject_2_text[0];
+var subject2 = () => {
+    document.removeEventListener('click', subject2);
+    progressBar.src = 'sources/images/progress bar 1.svg';
+    backwardArrow.style.opacity = '1';
+    console.log('sub2');
 }
 
-const subject3 = () => {
-    subjectHeadline.innerText = subject_3_headlines[0];
-    subjectText.innerText = subject_3_text[0];
+var subject3 = () => {
+    document.removeEventListener('click', subject3);
+    progressBar.src = 'sources/images/progress bar 1.svg';
+    backwardArrow.style.opacity = '1';
+    console.log('sub3');
 }
 
-const subject4 = () => {
-    subjectHeadline.innerText = subject_4_headlines[0];
-    subjectText.innerText = subject_4_text[0];
+var subject4 = () => {
+    document.removeEventListener('click', subject4);
+    progressBar.src = 'sources/images/progress bar 1.svg';
+    backwardArrow.style.opacity = '1';
+    console.log('sub4');
 }
 
-const subject5 = () => {
-    subjectHeadline.innerText = subject_5_headlines[0];
-    subjectText.innerText = subject_5_text[0];
+var subject5 = () => {
+    document.removeEventListener('click', subject5);
+    progressBar.style.opacity = '0';
+    forwardArrow.style.opacity = '0';
+    console.log('sub5');
 }
